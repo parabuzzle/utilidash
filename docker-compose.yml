@@ -1,0 +1,8 @@
+web:
+  build: .
+  volumes:
+    - .:/webapp
+  ports:
+    - "4567:4567"
+  environment:
+    ENVOY_HOST: 10.0.0.22
