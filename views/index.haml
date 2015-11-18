@@ -1,0 +1,13 @@
+%h1
+  Welcome to UtiliDash
+%p
+  UtiliDash is configured for
+  %ul
+    - if services[:envoy_host]
+      %li= "Envoy Realtime Monitor"
+    - if services[:enlighten]
+      %li= "Enphase Solar by Enlighten"
+    - if services[:smud]
+      %li= "SMUD Smart Meter"
+    - if services[:gas]
+      %li= "PG&E Gas Smart Meter"

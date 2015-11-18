@@ -1,0 +1,35 @@
+- if services[:envoy_host] || services[:enlighten]
+  %li.dropdown
+    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#"}
+      Solar
+      %ul.dropdown-menu
+        - if services[:enlighten]
+          %li
+            %a{href: "/solar"}
+              Overview
+        - if services[:envoy_host]
+          %li
+            %a{href: "/realtime"}
+              Realtime Monitor
+- if services[:smud]
+  %li.dropdown
+    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#"}
+      SMUD
+      %ul.dropdown-menu
+        %li
+          %a{href: "/power"}
+            Overview
+        %li
+          %a{href: "/realtime_power"}
+            Realtime Monitor
+- if services[:gas]
+  %li.dropdown
+    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#"}
+      Gas
+      %ul.dropdown-menu
+        %li
+          %a{href: "/gas"}
+            Overview
+        %li
+          %a{href: "/realtime_gas"}
+            Realtime Monitor

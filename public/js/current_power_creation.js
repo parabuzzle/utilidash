@@ -1,6 +1,6 @@
 $(function(){
 
-var wattsLast = 1
+var wattsLast = 0
 var wattsTemp = 0
 var wattsCurrent = 0
 

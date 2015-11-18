@@ -3,8 +3,13 @@ require 'httparty'
 require 'pry'
 require 'erb'
 require 'sinatra/base'
+require 'sinatra/partial'
 
 class UtiliDash < Sinatra::Base
+
+  register Sinatra::Partial
+  set :partial_template_engine, :haml
+  enable :partial_underscores
 
   configure do
     mime_type :javascript, 'application/javascript'
@@ -14,21 +19,63 @@ class UtiliDash < Sinatra::Base
   end
 
   def envoy_host
-    ENV['ENVOY_HOST'] || 'localhost'
+    ENV['ENVOY_HOST'] || nil
+  end
+
+
+  def enlighten_credentials
+    if ENV['ENLIGHTEN_USER']
+      {
+        userid: ENV['ENLIGHTEN_USER'],
+        apikey: ENV['ENLIGHTEN_KEY']
+      }
+    end
   end
 
   def to_bool(str)
     str.downcase == 'true'
   end
 
+  def services_configured
+    services = {}
+    services.store( :envoy_host, envoy_host )           if envoy_host
+    services.store( :enlighten, enlighten_credentials ) if enlighten_credentials
+    return services
+  end
+
   def production
-    response = HTTParty.get( "http://#{envoy_host}/api/v1/production" )
-    json = Oj.load response.body
+    if envoy_host
+      response = HTTParty.get( "http://#{envoy_host}/api/v1/production" )
+      Oj.load response.body
+    else
+      # Just return stubdata
+      {
+        wattHoursToday:     0,
+        wattHoursSevenDays: 0,
+        wattHoursLifetime:  0,
+        wattsNow:           0
+      }
+    end
+  end
+
+  helpers do
+    def services
+      services_configured
+    end
+  end
+
+  get '/services_configured.json' do
+    content_type :json
+    services_configured.to_json
   end
 
 
   get '/' do
-    erb :index
+    haml :index
+  end
+
+  get '/realtime' do
+    haml :realtime
   end
 
   get '/production.json' do

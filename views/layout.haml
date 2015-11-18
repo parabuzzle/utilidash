@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %title= "UtiliDash"
+    = #render 'layouts/favicon'
+    %link{:type => "text/css", :rel => "stylesheet", :href => "css/epoch.min.css"}
+    %link{:type => "text/css", :rel => "stylesheet", :href => "css/bootstrap.min.css"}
+    %link{:type => "text/css", :rel => "stylesheet", :href => "css/bootstrap-theme.min.css"}
+    %link{:type => "text/css", :rel => "stylesheet", :href => "css/application.css"}
+    %script(src="js/jquery-1.11.3.min.js")
+    %script(src="js/jquery-migrate-1.2.1.min.js")
+    %script(src="js/bootstrap.min.js")
+    %script(src="js/d3.v3.min.js")
+    %script(src="js/epoch.min.js")
+  %body
+    %header
+      = partial(:navigation)
+    %main{:role => "main"}
+      = #render 'layouts/messages'
+      .container
+        = yield
+    %footer
+      .text-center
+        = "&copy; Copyright #{Time.now.year} All Rights Reserved"

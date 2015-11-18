@@ -16,13 +16,10 @@ gem 'rake'
 
 # Component requirements
 gem 'slim'
-
 gem 'sinatra'
-
 gem 'rack', '~> 1.6.0'
-
 gem 'httparty'
-
 gem 'pry'
-
 gem 'memoist'
+gem 'haml'
+gem 'sinatra-partial'

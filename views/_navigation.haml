@@ -1,0 +1,16 @@
+-# navigation styled for Bootstrap 3.0
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      .navbar-brand
+        %a{ href: "/" }= "UtiliDash"
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        = partial(:navigation_links)
+      %ul.nav.navbar-nav.navbar-right
+        = partial(:right_navigation_links)
